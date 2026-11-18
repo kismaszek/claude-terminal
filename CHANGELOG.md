@@ -7,6 +7,13 @@ minden kiadás egy `v<verzió>` git tag a `main`-en.
 - **al**: új funkció, a frissítés egy `git pull` + `install.ps1`.
 - **javítás**: hibajavítás, a működés nem változik.
 
+## 1.2.3 – 2026-11-18
+
+- Saját ikonok (narancs `>_` termináljel, céges: kék C, magán: zöld M jelvény) a Claude-logó
+  helyett, mert az az Anthropic védjegye.
+- MIT-licenc, „nem hivatalos projekt” jelzés, angol README (alapértelmezett), a magyar a
+  `README.hu.md`-ben; az offline telepítő azt is viszi.
+
 ## 1.2.2 – 2026-11-17
 
 - A választó súgója a sorszámot `<sorszám>`-mal jelöli (`c<sorszám>`, `r<sorszám>`, `m<sorszám> <hely>`
