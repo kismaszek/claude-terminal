@@ -1,0 +1,11 @@
+# Rögzített projektek a Claude-projektválasztó menüjének elején.
+# Ez a gép saját listája (claude-projektek.txt), a repóba nem kerül; a mintája a
+# claude-projektek.minta.txt. A menüből is szerkeszthető: + rögzítés, a<szám> átnevezés,
+# -<szám> törlés, m<szám> <hely> áthelyezés, f<szám> fix sorszám be/ki.
+# Formátum: Név | Útvonal      "! útvonal" = elrejtett legutóbb használt mappa
+#           [3] Név | Útvonal  = fix sorszám: mindig a 3. helyen áll
+# A nem létező útvonalak kimaradnak. A lista alá a menü magától felveszi a legutóbb
+# használt mappákat (a ~/.claude/projects alapján).
+#
+# Példa:
+# Saját projekt | D:\Projektek\sajat-projekt

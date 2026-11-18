@@ -1,0 +1,79 @@
+{
+  "_megjegyzes": "A Windows Terminal Claude-profiljai, parancsai és gyorsbillentyűi. Az install.ps1 fésüli be a Terminal settings.json-jába (profil guid, action id és billentyű szerint cserél). Helyőrzők: {{REPO}} = ennek a repónak a mappája, {{CEGES}} / {{MAGAN}} = a céges / magán munkamappa. A globals mezői a Terminal globális beállításait írják felül.",
+  "globals": {
+    "windowingBehavior": "useAnyExisting",
+    "defaultProfile": "{c1a0de00-0000-4c1a-8000-0000000b0a1d}"
+  },
+  "profiles": [
+    {
+      "commandline": "pwsh.exe -NoExit -File \"{{REPO}}\\claude-projekt.ps1\" -Inditas \"{{CEGES}}\"",
+      "guid": "{c1a0de00-0000-4c1a-8000-00000000ce9e}",
+      "hidden": false,
+      "icon": "{{REPO}}\\icons\\claude-ceges.ico",
+      "name": "Céges Claude",
+      "startingDirectory": "{{CEGES}}",
+      "suppressApplicationTitle": true,
+      "tabColor": "#1E6FD9",
+      "tabTitle": "Céges Claude"
+    },
+    {
+      "commandline": "pwsh.exe -NoExit -File \"{{REPO}}\\claude-projekt.ps1\" -Inditas \"{{MAGAN}}\"",
+      "guid": "{c1a0de00-0000-4c1a-8000-0000000a9a40}",
+      "hidden": false,
+      "icon": "{{REPO}}\\icons\\claude-magan.ico",
+      "name": "Magán Claude",
+      "startingDirectory": "{{MAGAN}}",
+      "suppressApplicationTitle": true,
+      "tabColor": "#2E9E4F",
+      "tabTitle": "Magán Claude"
+    },
+    {
+      "commandline": "pwsh.exe -NoExit -File \"{{REPO}}\\claude-projekt.ps1\"",
+      "guid": "{c1a0de00-0000-4c1a-8000-0000000b0a1d}",
+      "hidden": false,
+      "icon": "{{REPO}}\\icons\\claude.ico",
+      "name": "Claude – projekt",
+      "startingDirectory": "%USERPROFILE%",
+      "tabColor": "#C15F3C",
+      "tabTitle": "Claude – projekt"
+    }
+  ],
+  "actions": [
+    { "id": "User.NewTabCegesClaude", "command": { "action": "newTab", "profile": "{c1a0de00-0000-4c1a-8000-00000000ce9e}" } },
+    { "id": "User.NewTabMaganClaude", "command": { "action": "newTab", "profile": "{c1a0de00-0000-4c1a-8000-0000000a9a40}" } },
+    { "id": "User.NewTabClaudeProjekt", "command": { "action": "newTab", "profile": "{c1a0de00-0000-4c1a-8000-0000000b0a1d}" } },
+    { "id": "User.SplitDuplicateRight", "name": "Ablakrész: Claude jobbra (választóval)", "command": { "action": "splitPane", "split": "right", "profile": "{c1a0de00-0000-4c1a-8000-0000000b0a1d}" } },
+    { "id": "User.SplitDuplicateDown", "name": "Ablakrész: Claude lefelé (választóval)", "command": { "action": "splitPane", "split": "down", "profile": "{c1a0de00-0000-4c1a-8000-0000000b0a1d}" } },
+    { "id": "User.SplitClaudeAuto", "name": "Ablakrész: Claude automatikus irányba (választóval)", "command": { "action": "splitPane", "split": "auto", "profile": "{c1a0de00-0000-4c1a-8000-0000000b0a1d}" } },
+    { "id": "User.PanelNagyitas", "name": "Ablakrész: nagyítás / vissza", "command": "togglePaneZoom" },
+    { "id": "User.PanelUjFulre", "name": "Ablakrész: áthelyezés új fülre", "command": { "action": "movePane", "index": 99 } },
+    { "id": "User.PanelUjAblakba", "name": "Ablakrész: áthelyezés új ablakba", "command": { "action": "movePane", "window": "new" } },
+    { "id": "User.ClaudeKepernyokep", "name": "Claude: képernyőkép beillesztése", "command": { "action": "splitPane", "split": "down", "size": 0.35, "tabTitle": "Képernyőkép", "commandline": "pwsh.exe -NoProfile -NoLogo -File \"{{REPO}}\\kepernyokep.ps1\"" } }
+  ],
+  "keybindings": [
+    { "id": "User.SplitDuplicateRight", "keys": "alt+shift+v" },
+    { "id": "User.SplitDuplicateDown", "keys": "alt+shift+h" },
+    { "id": "User.SplitClaudeAuto", "keys": "alt+shift+d" },
+    { "id": "User.NewTabCegesClaude", "keys": "ctrl+shift+1" },
+    { "id": "User.NewTabMaganClaude", "keys": "ctrl+shift+2" },
+    { "id": "User.NewTabClaudeProjekt", "keys": "ctrl+shift+3" },
+    { "id": "User.PanelNagyitas", "keys": "alt+shift+z" },
+    { "id": "User.PanelUjFulre", "keys": "alt+shift+t" },
+    { "id": "User.PanelUjAblakba", "keys": "alt+shift+n" },
+    { "id": "User.ClaudeKepernyokep", "keys": "alt+s" },
+    { "id": "Terminal.MovePaneToTab0", "keys": "alt+shift+1" },
+    { "id": "Terminal.MovePaneToTab1", "keys": "alt+shift+2" },
+    { "id": "Terminal.MovePaneToTab2", "keys": "alt+shift+3" },
+    { "id": "Terminal.MovePaneToTab3", "keys": "alt+shift+4" },
+    { "id": "Terminal.MovePaneToTab4", "keys": "alt+shift+5" },
+    { "id": "Terminal.MovePaneToTab5", "keys": "alt+shift+6" },
+    { "id": "Terminal.MovePaneToTab6", "keys": "alt+shift+7" },
+    { "id": "Terminal.MovePaneToTab7", "keys": "alt+shift+8" },
+    { "id": "Terminal.MovePaneToTab8", "keys": "alt+shift+9" }
+  ],
+  "newTabMenuTop": [
+    "{c1a0de00-0000-4c1a-8000-00000000ce9e}",
+    "{c1a0de00-0000-4c1a-8000-0000000a9a40}",
+    "{c1a0de00-0000-4c1a-8000-0000000b0a1d}"
+  ]
+}
