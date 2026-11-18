@@ -1,7 +1,12 @@
 # claude-terminal
 
+**Magyar** | [English](README.en.md)
+
 Windows Terminal beállítások Claude Code-hoz: projektválasztó, indítóprofilok, ablakrész-
 gyorsbillentyűk és parancspaletta-almenük, egy telepítővel.
+
+> **Nem hivatalos projekt.** Nem az Anthropic készítette, nem áll kapcsolatban vele, és az
+> Anthropic nem támogatja. A „Claude” és a „Claude Code” az Anthropic védjegye.
 
 ## Miért praktikus?
 
