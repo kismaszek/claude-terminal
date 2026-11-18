@@ -251,3 +251,8 @@ a commitok számát mutatja.
 - Munkamappák: `install.ps1 -Ujrakonfig`, vagy `install.ps1 -Ceges <mappa> -Magan <mappa|->`.
 - Profil, action, billentyű, globális beállítás: a `wt-claude.json`-ban, utána `install.ps1`. Ne
   közvetlenül a Terminal `settings.json`-jában, mert a következő telepítés felülírja.
+
+## Licenc
+
+MIT, lásd a [LICENSE](LICENSE) fájlt: szabadon használható, módosítható és továbbadható, a
+szerzői sor megtartásával, garancia nélkül.
