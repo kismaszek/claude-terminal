@@ -1,263 +1,262 @@
 # claude-terminal
 
-**Magyar** | [English](README.en.md)
+[Magyar](README.hu.md) | **English**
 
-Windows Terminal beállítások Claude Code-hoz: projektválasztó, indítóprofilok, ablakrész-
-gyorsbillentyűk és parancspaletta-almenük, egy telepítővel.
+Windows Terminal setup for Claude Code: project picker, launcher profiles, pane shortcuts and
+command palette submenus, with a single installer.
 
-> **Nem hivatalos projekt.** Nem az Anthropic készítette, nem áll kapcsolatban vele, és az
-> Anthropic nem támogatja. A „Claude” és a „Claude Code” az Anthropic védjegye.
+> **Unofficial project.** It is not made by, affiliated with, or endorsed by Anthropic.
+> "Claude" and "Claude Code" are trademarks of Anthropic.
 
-## Miért praktikus?
+> **Note on language:** the user interface (menus, prompts, palette entries) and the installer
+> parameters are in Hungarian. Everything works the same for non-Hungarian speakers; this README
+> explains what each item means.
 
-Aki több projekten dolgozik Claude Code-dal, annak a napja azzal indul, hogy ablakot nyit,
-`cd`-zik a megfelelő mappába, és elindítja a `claude`-ot. Ha egy félbehagyott munkát folytatna,
-azt is tudnia kell, melyik mappában volt és milyen kapcsolóval. Ez a csomag ezt egy
-billentyűre vagy egy listaválasztásra rövidíti:
+## Why is it handy?
 
-- **Asztali ikon, és ott folytatod, ahol abbahagytad.** A „Claude projektek” ikon megkérdezi:
-  új munka (projektválasztó), vagy az előző munkamenet folytatása. Folytatáskor az előző
-  munkamenet minden projektje külön fülön nyílik meg, és mindegyikben a Claude az utolsó
-  beszélgetést folytatja.
-- **Egy billentyű, és a projektben vagy.** `Ctrl+Shift+3` megnyitja a projektlistát. Egy szám,
-  és az adott mappában már fut is a Claude. A legutóbb használt mappák maguktól kerülnek fel.
-- **Folytatás egy lépésben.** `c2` a 2. projekt utolsó sessionjét folytatja, `r2` a korábbiak
-  közül választ. Nem kell emlékezni, hol tartottál.
-- **Több projekt egymás mellett.** `Alt+Shift+V` / `H` új ablakrészt nyit (a fül kettéosztva),
-  ugyanezzel a választóval. Egy ablakrész kinagyítható, új fülre vagy ablakba tehető, és vissza
-  is rakható.
-- **Képernyőkép egy gombbal.** `Alt+S`, kiválasztod a monitort (vagy egy területet), és a kép
-  már bent is van a Claude beviteli sorában, csak a kérdést kell mellé írni.
-- **Súgó a választó alján.** A választó parancsai és a Terminal billentyűi (képernyőkép,
-  ablakrészek) egy pillantással átláthatók, nem kell fejben tartani őket.
-- **Minden a parancspalettáról is megy.** `Ctrl+Shift+P`, beírod, hogy „claude”, és a projektre
-  gépelve indíthatsz, folytathatsz, vagy a listát kezelheted.
-- **Rendezett Terminal.** Az új indítás a meglévő ablak új fülén nyílik, a Claude-fülek színesek,
-  és az ikonjuk is mutatja, melyik melyik.
-- **Egyszerű telepítés.** Egy dupla kattintás, hálózat nélkül is működik. A meglévő Terminal-
-  beállításokhoz nem nyúl, és előtte mentést készít.
+If you work on several projects with Claude Code, your day starts with opening a window, `cd`-ing
+into the right folder and starting `claude`. To pick up unfinished work you also have to remember
+which folder it was in and which flag to use. This package shortens all of that to a single key or
+a pick from a list:
 
-## Hogyan néz ki
+- **Desktop icon that picks up where you left off.** The "Claude projektek" (Claude projects) icon
+  asks: new work (project picker), or continue the previous session. When continuing, every
+  project of the previous session opens in its own tab, and in each one Claude continues the last
+  conversation.
+- **One key and you are in the project.** `Ctrl+Shift+3` opens the project list. Type a number
+  and Claude is already running in that folder. Recently used folders are added automatically.
+- **Resume in one step.** `c2` continues the last session of project 2, `r2` lets you choose from
+  earlier ones. No need to remember where you were.
+- **Several projects side by side.** `Alt+Shift+V` / `H` opens a new pane (the tab split in two)
+  with the same picker. A pane can be zoomed, moved to a new tab or window, and moved back.
+- **Screenshot with one key.** `Alt+S`, pick a monitor (or an area), and the image is already in
+  Claude's input line; you only have to type the question.
+- **Help at the bottom of the picker.** The picker's commands and the Terminal keys
+  (screenshot, panes) are visible at a glance, so you don't have to memorize them.
+- **Everything works from the command palette too.** `Ctrl+Shift+P`, type "claude", then type the
+  project name to start, resume or manage the list.
+- **A tidy Terminal.** New launches open as a new tab in the existing window, Claude tabs are
+  colored, and their icons show which is which.
+- **Simple installation.** One double-click, works offline. It does not touch your existing
+  Terminal settings, and it makes a backup first.
 
-- **Projektválasztó** (`Ctrl+Shift+3`): fent a rögzített projektek, alattuk a legutóbb
-  használtak dátummal. Az egyforma nevű mappák a szülőmappájukkal különülnek el.
-- **Több session egy ablakban:** egy fülön több ablakrész (a fül kettéosztott részei),
-  mindegyikben külön projekt Claude-ja, egymástól függetlenül. Új ablakrész: `Alt+Shift+V`
-  (jobbra) / `H` (lefelé), és benne ugyanez a választó jön fel. Váltás: `Alt+nyilak`, méretezés:
-  `Alt+Shift+nyilak`, bezárás: `Ctrl+Shift+W`.
-- **Ablakrészek kezelése:** nagyítás (`Alt+Shift+Z`), áthelyezés új fülre (`Alt+Shift+T`) vagy új
-  ablakba (`Alt+Shift+N`), vissza egy meglévő fülre `Alt+Shift+1…9`-cel. A futó session nem szakad meg.
-- **Parancspaletta** (`Ctrl+Shift+P`, „claude”): indítás új fülön vagy ablakrészben, folytatás,
-  korábbi session, listakezelés (átnevezés, rögzítés, törlés, új mappa).
-- **Új fül menü** (a `+` melletti lenyíló): a három Claude-profil legfelül.
+## What it looks like
 
-## Telepítés
+- **Project picker** (`Ctrl+Shift+3`): pinned projects at the top, recently used ones below with
+  dates. Folders with the same name are distinguished by their parent folder.
+- **Several sessions in one window:** multiple panes in one tab, each running Claude in a
+  different project, independently. New pane: `Alt+Shift+V` (right) / `H` (down), and the same
+  picker comes up inside it. Switch: `Alt+arrows`, resize: `Alt+Shift+arrows`, close:
+  `Ctrl+Shift+W`.
+- **Pane management:** zoom (`Alt+Shift+Z`), move to a new tab (`Alt+Shift+T`) or a new window
+  (`Alt+Shift+N`), back to an existing tab with `Alt+Shift+1…9`. The running session is not
+  interrupted.
+- **Command palette** (`Ctrl+Shift+P`, "claude"): start in a new tab or pane, continue, earlier
+  session, list management (rename, pin, delete, new folder).
+- **New tab menu** (the dropdown next to `+`): the three Claude profiles at the top.
 
-Előfeltétel: Windows Terminal (legalább egyszer elindítva), PowerShell 7 (`pwsh`) és a `claude`
-parancs. Ha valamelyik hiányzik, a telepítő megmondja, hogyan pótolható.
+## Installation
 
-**A legegyszerűbb, ha már használsz Claude Code-ot:** írd be neki ezt:
+Requirements: Windows Terminal (started at least once), PowerShell 7 (`pwsh`) and the `claude`
+command. If one is missing, the installer tells you how to get it.
+
+**Easiest if you already use Claude Code:** tell it:
 
 ```
-Telepítsd fel nekem: https://github.com/kismaszek/claude-terminal
+Install this for me: https://github.com/kismaszek/claude-terminal
 ```
 
-A Claude letölti, megkérdezi a két munkamappát, és lefuttatja a telepítőt.
+Claude downloads it, asks for the two working folders and runs the installer.
 
-> **Claude-nak szóló telepítési útmutató:**
-> 1. Klónozd a repót a `$env:USERPROFILE\claude-terminal` mappába. Ha ott már van klón, ahelyett
->    `git pull`.
-> 2. Kérdezd meg a felhasználótól a Céges és a Magán profil munkamappáját. Javaslat: Céges =
->    `D:\CLAUDE`, ha létezik, különben a felhasználói mappa; Magán = `~\claude-workspace`, ha
->    létezik. A `-` azt jelenti, hogy az a profil ne legyen.
-> 3. Futtasd: `pwsh -NoProfile -File $env:USERPROFILE\claude-terminal\install.ps1 -Ceges <mappa>
->    -Magan <mappa|->`. Ha a felhasználó később újra akarja kérdeztetni, akkor `-Ujrakonfig`.
-> 4. Ha a telepítő előfeltételt hiányol, mondd el a felhasználónak, mit és hogyan kell pótolnia,
->    és a pótlás után futtasd újra.
-> 5. A végén mondd el a telepítő kimenetét, és hogy a `Ctrl+Shift+3` vagy az asztali „Claude
->    projektek” ikon indítja. Tool-hívásból ne indíts Windows Terminalt, mert a
->    `CLAUDE_CODE_CHILD_SESSION` öröklődne, és az ott induló Claude nem írna transcriptet.
+> **Installation guide for Claude:**
+> 1. Clone the repo into `$env:USERPROFILE\claude-terminal`. If a clone is already there, run
+>    `git pull` instead.
+> 2. Ask the user for the working folder of the "Céges" (work) and the "Magán" (personal)
+>    profile. Suggestion: work = `D:\CLAUDE` if it exists, otherwise the user folder; personal =
+>    `~\claude-workspace` if it exists. `-` means that profile should not be created.
+> 3. Run: `pwsh -NoProfile -File $env:USERPROFILE\claude-terminal\install.ps1 -Ceges <folder>
+>    -Magan <folder|->`. If the user later wants to be asked again, use `-Ujrakonfig`.
+> 4. If the installer reports a missing requirement, tell the user what is missing and how to
+>    get it, then run it again.
+> 5. At the end, report the installer output, and that `Ctrl+Shift+3` or the "Claude projektek"
+>    desktop icon starts it. Do not start Windows Terminal from a tool call, because
+>    `CLAUDE_CODE_CHILD_SESSION` would be inherited and Claude started there would not write a
+>    transcript.
 
-**Git-klónnal** (ajánlott, így a frissítés egy `git pull`):
+**With a git clone** (recommended, updating is then a `git pull`):
 
 ```powershell
 git clone https://github.com/kismaszek/claude-terminal.git $env:USERPROFILE\claude-terminal
 pwsh -File $env:USERPROFILE\claude-terminal\install.ps1
 ```
 
-Ilyenkor helyben telepít, a profilok a klónra mutatnak. A menü szkriptjének változása a
-`git pull` után azonnal él, a `wt-claude.json` változása után az `install.ps1`-et újra kell
-futtatni.
+This installs in place; the profiles point to the clone. Changes to the menu script take effect
+right after `git pull`; after a change to `wt-claude.json`, run `install.ps1` again.
 
-**Frissítés-jelzés:** a Claude-profilok indulásakor a szkript a háttérben `git fetch`-et futtat
-(legfeljebb 3 mp-et vár rá, ha a szerver nem érhető el, nem akad meg). Ha a távoli ág előrébb
-jár, a választó kiírja az új commitokat, és az `u` lefuttatja a `git pull`-t és az
-`install.ps1`-et, majd újraindul. A Céges/Magán profil csak egy sort ír ki, és nem vár a
-fetch-re (az előző indításkori eredményt mutatja).
+**Update notice:** when a Claude profile starts, the script runs `git fetch` in the background
+(waiting at most 3 seconds, so an unreachable server does not block it). If the remote branch is
+ahead, the picker lists the new commits, and `u` runs `git pull` and `install.ps1`, then restarts.
+The work/personal profiles only print one line and do not wait for the fetch (they show the result
+of the previous start).
 
-**Offline, csomagból:** a GitHubon *Code → Download ZIP*, vagy a mappa átmásolása pendrive-on
-vagy megosztón. Kibontás után dupla kattintás a `telepites.cmd`-re. A fájlok a
-`%LOCALAPPDATA%\claude-terminal` mappába kerülnek, a letöltés utána törölhető. Frissítés: új
-csomag, és ugyanúgy `telepites.cmd`.
+**Offline, from a package:** on GitHub *Code → Download ZIP*, or copy the folder via USB stick or a
+network share. After extracting, double-click `telepites.cmd`. The files are copied to
+`%LOCALAPPDATA%\claude-terminal`, and the download can be deleted afterwards. Update: a new package,
+and `telepites.cmd` again.
 
-**Első telepítéskor** a telepítő megkérdezi a gép két munkamappáját, a Céges és a Magán profilét
-(Enter = a javaslat, `-` = az a profil ne legyen). A válaszokat a `gep.json`-ban jegyzi meg,
-újrakérdezés: `-Ujrakonfig`.
+**On first install** the installer asks for the machine's two working folders, for the "Céges"
+(work) and the "Magán" (personal) profile (Enter = the suggestion, `-` = no such profile). The
+answers are stored in `gep.json`; to be asked again: `-Ujrakonfig`.
 
-**Asztali ikon:** a telepítő létrehozza az asztalon a „Claude projektek” parancsikont (kihagyás:
-`-NincsIkon`). Indításkor:
+**Desktop icon:** the installer creates the "Claude projektek" shortcut on the desktop (skip it
+with `-NincsIkon`). When started, it shows:
 
 ```
   Claude – indítás
 
    1) Új munka: projektválasztó
    2) Előző munkamenet folytatása (bezárva 2026-11-11 12:42, 3 projekt):
-        1. Weboldal  D:\Projektek\weboldal
-        2. Okosotthon  D:\Projektek\okosotthon
-        3. Jegyzetek  D:\Projektek\jegyzetek
+        1. Website  D:\Projects\website
+        2. SmartHome  D:\Projects\smarthome
+        3. Notes  D:\Projects\notes
 
   Választás (Enter = 1)
 ```
 
-A `2` után megkérdezi, melyiket folytassa (Enter = mind, vagy sorszámok, pl. `1,3`). Az első
-projekt az aktuális fülön, a többi új fülön indul ugyanabban az ablakban, mindegyik
-`claude --continue`-val. Ha az előző munkamenet üres (első használat), rögtön a projektválasztó
-jön.
+(1 = new work: project picker; 2 = continue the previous session, closed at the given time, with
+3 projects.) After `2` it asks which ones to continue (Enter = all, or numbers such as `1,3`). The
+first project starts in the current tab, the others in new tabs of the same window, each with
+`claude --continue`. If there is no previous session (first use), the project picker comes up
+directly.
 
-**Mi az előző munkamenet:** minden Claude-fül (menü, paletta, Céges/Magán profil,
-visszaállítás) futás közben jelzőfájlt tart a `munkamenetek\` mappában (gépenkénti, nincs
-verziózva), és 20 másodpercenként frissíti. Ha a Claude szabályosan kilép, a jelző törlődik. Ha
-viszont a fület vagy az ablakot bezárják, vagy a gép leáll, a jelző megmarad, és az utolsó
-frissítése megmutatja, mikor szűnt meg a fül. A fül a bezárás pillanatában meg is jelöli a
-jelzőjét, mert a Windows a bezárt folyamatot még néhány másodpercig életben hagyja; így a
-bezárás után azonnal indított ablak is felkínálja a visszaállítást. Az előző munkamenet a legutóbb, egyszerre (90
-másodpercen belül) megszűnt fülek köre. A korábban, külön bezárt fülek és a még futó fülek nem
-kerülnek bele. Visszaállítás után a régi jelzők törlődnek. Az „Új munka” választás megtartja
-őket, így a visszaállítás később is elérhető marad.
+**What the previous session is:** every Claude tab (menu, palette, work/personal profile, restore)
+keeps a marker file in the `munkamenetek\` folder while running (per machine, not versioned) and
+refreshes it every 20 seconds. When Claude exits normally, the marker is deleted. If the tab or
+window is closed or the machine shuts down, the marker stays, and its last refresh shows when the
+tab ended. The tab also flags its marker at the moment it is closed, because Windows keeps the
+closed process alive for a few seconds; so a window started right after closing also offers the
+restore. The previous session is the set of tabs that ended last, together (within 90 seconds).
+Tabs closed earlier, separately, and tabs still running are not included. After a restore the old
+markers are deleted. Choosing "new work" keeps them, so the restore stays available later.
 
-A telepítő a `wt-claude.json` alapján fésüli bele a Terminal `settings.json`-jába a
-beállításokat, és előtte mentést készít (`settings.json.bak-<időbélyeg>`). Többször is
-futtatható. A profilokat guid, az actionöket id szerint cseréli, a gyorsbillentyűknél az azonos
-billentyűn ülő más hozzárendelést törli. `-WhatIf`: csak kiírja, mit csinálna.
+The installer merges the settings from `wt-claude.json` into the Terminal's `settings.json`,
+making a backup first (`settings.json.bak-<timestamp>`). It can be run repeatedly. Profiles are
+replaced by guid, actions by id, and for key bindings any other binding on the same key is
+removed. `-WhatIf`: only prints what it would do.
 
-## Gyorsbillentyűk és parancsok
+## Keys and commands
 
-| Billentyű / hely | Mit csinál |
+| Key / place | What it does |
 |---|---|
-| `Ctrl+Shift+1` | Céges Claude új fülön (a gép céges munkamappájában) |
-| `Ctrl+Shift+2` | Magán Claude új fülön (a gép magán munkamappájában) |
-| `Ctrl+Shift+3` | Claude – projekt: a választó menü |
-| `Alt+Shift+V` / `H` / `D` | új ablakrész jobbra / lefelé / automatikusan, a választó menüvel |
-| `Alt+Shift+Z` | ablakrész nagyítása / vissza |
-| `Alt+Shift+T` / `N` | ablakrész áthelyezése új fülre / új ablakba |
-| `Alt+Shift+1…9` | ablakrész áthelyezése az 1–9. fülre |
-| `Alt+S` | képernyőkép a Claude-nak: monitor / összes / terület / utolsó kép választása (lásd lent) |
-| `Ctrl+Shift+P` → „claude” | Claude: projekt új fülön / új ablakrészben / folytatása / korábbi sessionje, projektlista kezelése |
-| `Alt+Shift+-` / `Alt+Shift+=` | az aktuális ablakrész duplikálása lefelé / jobbra (a Terminal alapja, változatlan) |
+| `Ctrl+Shift+1` | "Céges" (work) Claude in a new tab (in the machine's work folder) |
+| `Ctrl+Shift+2` | "Magán" (personal) Claude in a new tab (in the machine's personal folder) |
+| `Ctrl+Shift+3` | "Claude – projekt": the picker menu |
+| `Alt+Shift+V` / `H` / `D` | new pane right / down / automatic, with the picker menu |
+| `Alt+Shift+Z` | zoom pane / restore |
+| `Alt+Shift+T` / `N` | move pane to a new tab / new window |
+| `Alt+Shift+1…9` | move pane to tab 1–9 |
+| `Alt+S` | screenshot for Claude: choose monitor / all / area / last image (see below) |
+| `Ctrl+Shift+P` → "claude" | Claude: project in new tab / new pane / continue / earlier session, manage project list |
+| `Alt+Shift+-` / `Alt+Shift+=` | duplicate the current pane down / right (Terminal default, unchanged) |
 
-A választó a projektlista alatt a saját parancsait és a Terminal fenti billentyűit is mutatja
-(„Billentyűk”: képernyőkép, ablakrészek), hogy ne kelljen fejben tartani őket.
+Below the project list, the picker also shows its own commands and the Terminal keys above
+("Billentyűk": screenshot, panes), so you don't have to memorize them.
 
-**Ablakrész** = a fül egy kettéosztott része (a Windows Terminalban „pane”): egy fülön belül több
-egymás melletti vagy alatti terület, mindegyikben külön session.
+**Picker commands:**
 
-**A választó menü parancsai:**
-
-| Beírás | Mit csinál |
+| Input | What it does |
 |---|---|
-| `3` | Claude indítása a 3. projektben (Enter = az 1.) |
-| útvonal | Claude indítása abban a mappában |
-| `c3` / `r3` | a 3. projekt utolsó sessionjének folytatása / korábbi session választása |
-| `+` / `+C:\mappa` | új mappa rögzítése (nevet kér) |
-| `+3` | a 3. tétel rögzítése (pl. egy legutóbb használt) |
-| `a3` | a 3. tétel átnevezése |
-| `-3` | a 3. tétel törlése (legutóbb használtnál: elrejtése) |
-| `m5 1` | az 5. tétel áthelyezése az 1. helyre (`m5` = rákérdez a helyre) |
-| `f3` | a 3. tétel fix sorszámot kap (mindig a 3. marad); újra `f3` = a fixálás levétele |
-| `k <név>` | mappa keresése név szerint (kis/nagybetű és ékezet nem számít) |
-| `k` | új projektmappák felderítése: `.git`, `CLAUDE.md` vagy `.claude` van bennük, és még nincsenek a listán |
-| `u` | frissítés, ha a választó jelzi, hogy a repóban új commit van |
-| `q` | kilépés, marad a PowerShell |
+| `3` | start Claude in project 3 (Enter = the 1st) |
+| a path | start Claude in that folder |
+| `c3` / `r3` | continue the last session of project 3 / choose an earlier session |
+| `+` / `+C:\folder` | pin a new folder (asks for a name) |
+| `+3` | pin item 3 (e.g. a recently used one) |
+| `a3` | rename item 3 |
+| `-3` | delete item 3 (for a recently used one: hide it) |
+| `m5 1` | move item 5 to position 1 (`m5` = asks for the position) |
+| `f3` | give item 3 a fixed position (it always stays 3rd); `f3` again = remove the fixed position |
+| `k <name>` | search for a folder by name (case and accents are ignored) |
+| `k` | discover new project folders: ones with `.git`, `CLAUDE.md` or `.claude` that are not yet on the list |
+| `u` | update, when the picker reports new commits in the repo |
+| `q` | quit, leaving a PowerShell prompt |
 
-**Képernyőkép (`Alt+S`):** a Claude-ablakrész alatt egy kis választó nyílik. `1`…`9` = az adott
-monitor (balról jobbra; a Terminal monitorát jelöli), `a` = az összes monitor egyben, `t` =
-terület kijelölése (Win+Shift+S), `u` = a legutóbbi képernyőkép (a Win+Shift+S / PrtScn
-mentési mappájából vagy a `Képek\Claude`-ból), `Esc` = mégse. A választás után a választó bezárul,
-a kép a vágólapra kerül, és egy rejtett segédfolyamat `Alt+V`-t küld a Terminalnak, amitől a
-Claude Code beilleszti (`[Image #1]`). Ha a választott monitoron van a Terminal, a kép idejére
-lekicsinyül, hogy ne takarja ki a tartalmat. A monitorképek a `Képek\Claude` mappába is
-mentődnek. Hiba esetén a részletek a repó `kepernyokep.log` fájljában vannak; ha a beillesztés
-elmarad (pl. közben máshová kattintottál), a kép a vágólapon van, `Alt+V`-vel kézzel is
-beilleszthető.
+**Screenshot (`Alt+S`):** a small picker opens below the Claude pane. `1`…`9` = that monitor (left
+to right; the Terminal's monitor is marked), `a` = all monitors together, `t` = select an area
+(Win+Shift+S), `u` = the most recent screenshot (from the Win+Shift+S / PrtScn save folder or from
+`Pictures\Claude`), `Esc` = cancel. After choosing, the picker closes, the image goes to the
+clipboard, and a hidden helper process sends `Alt+V` to the Terminal, which makes Claude Code paste
+it (`[Image #1]`). If the Terminal is on the chosen monitor, it is minimized for the capture so it
+does not cover the content. Monitor captures are also saved to `Pictures\Claude`. On error, details
+are in the repo's `kepernyokep.log`; if the paste does not happen (e.g. you clicked elsewhere
+meanwhile), the image is on the clipboard and can be pasted manually with `Alt+V`.
 
-Globális beállítás (`wt-claude.json` → `globals`): `windowingBehavior: useAnyExisting`, vagyis
-egy új Terminal-indítás (parancsikon, `wt`, Start menü) a meglévő ablak új fülén nyílik meg.
+Global setting (`wt-claude.json` → `globals`): `windowingBehavior: useAnyExisting`, so a new
+Terminal launch (shortcut, `wt`, Start menu) opens as a new tab in the existing window.
 
-`defaultProfile`: a „Claude – projekt” profil, így a fülsáv **+** gombja (és a Ctrl+Shift+T, valamint
-a sima `wt` / Start menüs indítás) a projektválasztót nyitja. Sima PowerShellhez a + melletti
-lenyíló menüből kell választani.
+`defaultProfile`: the "Claude – projekt" profile, so the tab bar's **+** button (and
+`Ctrl+Shift+T`, and a plain `wt` / Start menu launch) opens the project picker. For a plain
+PowerShell, choose it from the dropdown next to +.
 
-Minden Claude-indítás előtt törlődik a `CLAUDE_CODE_CHILD_SESSION` és a `NO_COLOR` változó.
-Ha egy Terminal-ablakot egy Claude-session tool-hívása indított, ezek öröklődnek, és ilyenkor a
-session nem ír transcriptet (a `--resume` nem látja), és fekete-fehér lesz.
+Before every Claude launch, the `CLAUDE_CODE_CHILD_SESSION` and `NO_COLOR` variables are cleared.
+If a Terminal window was started by a Claude session's tool call, these are inherited, and then the
+session writes no transcript (`--resume` cannot see it) and runs in black and white.
 
-## Projektlista
+## Project list
 
-- **Gépenkénti:** a `claude-projektek.txt` a gép saját listája, a repóba nem kerül. Ha még
-  nincs, a `claude-projektek.minta.txt`-ből készül. Formátum: `Név | Útvonal`, `#` = megjegyzés,
-  `! útvonal` = elrejtett mappa, `[3] Név | Útvonal` = fix sorszámú tétel. A nem létező útvonalak
-  kimaradnak.
-- **Sorrend:** a fix tételek mindig a saját sorszámukon állnak. A többi tétel a maradék helyeket
-  tölti ki: elöl a rögzítettek a fájlbeli sorrendjükben, utánuk a legutóbb használtak a használat
-  ideje szerint. Ha egy fix sorszám nagyobb a lista hosszánál, a tétel a lista végére kerül.
-- **Áthelyezés (`m<szám> <hely>`):** fix tételnél a fix sorszámot állítja át, és ha a célhelyen
-  másik fix tétel áll, a kettő helyet cserél. Rögzített tételnél a rögzítettek sorrendjét
-  módosítja; fix tétel helyére nem tehető. Legutóbb használt tételt előbb rögzít. A legutóbb
-  használtak közé nem tehető tétel, ilyenkor a rögzítettek végére kerül.
-- **Fix sorszám (`f<szám>`):** a tétel a mostani helyén marad. Legutóbb használt tételt ehhez
-  rögzít is. A levétele után a tétel rögzített marad.
-- **Legutóbb használt mappák:** a `~/.claude/projects` alapján, a legfrissebbel kezdve,
-  legfeljebb 15.
-- **Átnevezés:** legutóbb használt tétel átnevezésekor a mappa az új névvel a rögzítettek közé
-  kerül, mert név csak ott tárolható.
-- **Törlés:** rögzített tételnél kiveszi a sort. Legutóbb használt tételnél egy `! <útvonal>` sort
-  ír, ettől a mappa nem jelenik meg többé. Visszahozás: `+<útvonal>`.
-- **Keresés (`k`):** a fix meghajtókon és a felhasználói mappában keres, legfeljebb 4 szint
-  mélyen, 15 mp-ig. A rendszermappákat (`Windows`, `Program Files`, `AppData`…) és a
-  build-/függőségmappákat (`node_modules`, `bin`, `obj`…) kihagyja. A találatok közül szám =
-  Claude indítása ott, `+<szám>` = rögzítés a listára. A parancspalettán: projektlista
-  kezelése → Projektmappa keresése…
+- **Per machine:** `claude-projektek.txt` is the machine's own list and is not committed. If it
+  does not exist yet, it is created from `claude-projektek.minta.txt`. Format: `Name | Path`,
+  `#` = comment, `! path` = hidden folder, `[3] Name | Path` = item with a fixed position.
+  Paths that don't exist are skipped.
+- **Order:** fixed items always stay at their own position. The other items fill the remaining
+  slots: first the pinned ones in file order, then the recently used ones by time of use. If a
+  fixed position is larger than the list, the item goes to the end.
+- **Moving (`m<number> <position>`):** for a fixed item it changes the fixed position, and if
+  another fixed item is at the target, the two swap. For a pinned item it changes the order of the
+  pinned items; it cannot take a fixed item's place. A recently used item is pinned first. An item
+  cannot be moved among the recently used ones; it goes to the end of the pinned ones instead.
+- **Fixed position (`f<number>`):** the item stays where it is now. A recently used item is also
+  pinned for this. After removing the fixed position, the item stays pinned.
+- **Recently used folders:** from `~/.claude/projects`, newest first, at most 15.
+- **Renaming:** renaming a recently used item moves the folder to the pinned items with the new
+  name, because names can only be stored there.
+- **Deleting:** for a pinned item it removes the line. For a recently used item it writes a
+  `! <path>` line, so the folder no longer appears. To bring it back: `+<path>`.
+- **Search (`k`):** searches fixed drives and the user folder, at most 4 levels deep, for up to 15
+  seconds. System folders (`Windows`, `Program Files`, `AppData`…) and build/dependency folders
+  (`node_modules`, `bin`, `obj`…) are skipped. Among the results, a number = start Claude there,
+  `+<number>` = pin to the list. In the command palette: manage project list → search project
+  folder.
 
-A paletta-almenüket a választó minden indításkor frissíti (csak ha változott). Kézzel:
+The picker refreshes the palette submenus on every start (only if something changed). Manually:
 
 ```powershell
 pwsh $env:USERPROFILE\claude-terminal\claude-projekt.ps1 -CsakPaletta
 ```
 
-## Verziózás
+## Versioning
 
-A verziószám a `VERSION` fájlban van (SemVer: fő.al.javítás), a változások a `CHANGELOG.md`-ben.
-A telepítő és a menü fejléce kiírja az aktuális verziót, a frissítés-jelzés pedig a régit és az
-újat is (pl. `v1.0.0 → v1.1.0`).
+The version number is in the `VERSION` file (SemVer: major.minor.patch), changes are in
+`CHANGELOG.md` (in Hungarian). The installer and the menu header show the current version, and the
+update notice shows both the old and the new one (e.g. `v1.0.0 → v1.1.0`).
 
-**Kiadás:** a `VERSION` emelése, új szakasz a `CHANGELOG.md` tetején, commit a `main`-re, majd
-annotált tag és push:
+**Release:** bump `VERSION`, add a new section at the top of `CHANGELOG.md`, commit to `main`, then
+an annotated tag and push:
 
 ```powershell
 git tag -a v1.2.1 -m "1.2.1"
 git push origin main --follow-tags
 ```
 
-Kisebb commit (pl. README-javítás) verzióemelés nélkül is mehet. Ilyenkor a frissítés-jelzés csak
-a commitok számát mutatja.
+Smaller commits (e.g. README fixes) can go without a version bump. The update notice then only
+shows the number of commits.
 
-## Testreszabás
+## Customization
 
-- Munkamappák: `install.ps1 -Ujrakonfig`, vagy `install.ps1 -Ceges <mappa> -Magan <mappa|->`.
-- Profil, action, billentyű, globális beállítás: a `wt-claude.json`-ban, utána `install.ps1`. Ne
-  közvetlenül a Terminal `settings.json`-jában, mert a következő telepítés felülírja.
+- Working folders: `install.ps1 -Ujrakonfig`, or `install.ps1 -Ceges <folder> -Magan <folder|->`.
+- Profiles, actions, keys, global settings: in `wt-claude.json`, then `install.ps1`. Not directly
+  in the Terminal's `settings.json`, because the next install overwrites it.
 
-## Licenc
+## License
 
-MIT, lásd a [LICENSE](LICENSE) fájlt: szabadon használható, módosítható és továbbadható, a
-szerzői sor megtartásával, garancia nélkül.
+MIT, see the [LICENSE](LICENSE) file: free to use, modify and redistribute, keeping the copyright
+notice, without warranty.

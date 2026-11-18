@@ -72,7 +72,7 @@ if ($dst -ne $src) {
     Say "$(if ($isUpdate) { 'Frissítés' } else { 'Telepítés' }): $dst"
     if (-not $WhatIf) {
         New-Item -ItemType Directory -Force (Join-Path $dst 'icons') | Out-Null
-        foreach ($f in 'claude-projekt.ps1', 'kepernyokep.ps1', 'install.ps1', 'wt-claude.json', 'README.md', 'telepites.cmd', 'claude-projektek.minta.txt', 'VERSION', 'CHANGELOG.md') {
+        foreach ($f in 'claude-projekt.ps1', 'kepernyokep.ps1', 'install.ps1', 'wt-claude.json', 'README.md', 'README.hu.md', 'telepites.cmd', 'claude-projektek.minta.txt', 'VERSION', 'CHANGELOG.md') {
             if (Test-Path (Join-Path $src $f)) { Copy-Item (Join-Path $src $f) (Join-Path $dst $f) -Force }
         }
         Copy-Item (Join-Path $src 'icons\*') (Join-Path $dst 'icons') -Force
