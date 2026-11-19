@@ -7,6 +7,15 @@ minden kiadás egy `v<verzió>` git tag a `main`-en.
 - **al**: új funkció, a frissítés egy `git pull` + `install.ps1`.
 - **javítás**: hibajavítás, a működés nem változik.
 
+## 1.2.4 – 2026-11-19
+
+- Az „Előző munkamenet folytatása” listában a projekt mellett a session neve látszik (`/rename`
+  vagy hook által adott név, ennek híján a Claude-generált cím) az útvonal helyett; név híján
+  marad az útvonal.
+- A folytatás a bezáráskor futott sessiont nyitja meg (`claude --resume <session>`), nem a mappa
+  legfrissebbjét: ha ugyanabban a mappában egy másik fülön még fut egy session, a `--continue`
+  azt választotta volna.
+
 ## 1.2.3 – 2026-11-18
 
 - Saját ikonok (narancs `>_` termináljel, céges: kék C, magán: zöld M jelvény) a Claude-logó

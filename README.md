@@ -21,8 +21,8 @@ a pick from a list:
 
 - **Desktop icon that picks up where you left off.** The "Claude projektek" (Claude projects) icon
   asks: new work (project picker), or continue the previous session. When continuing, every
-  project of the previous session opens in its own tab, and in each one Claude continues the last
-  conversation.
+  project of the previous session opens in its own tab, and in each one Claude continues the
+  conversation that was running there when it was closed.
 - **One key and you are in the project.** `Ctrl+Shift+3` opens the project list. Type a number
   and Claude is already running in that folder. Recently used folders are added automatically.
 - **Resume in one step.** `c2` continues the last session of project 2, `r2` lets you choose from
@@ -116,18 +116,22 @@ with `-NincsIkon`). When started, it shows:
 
    1) Új munka: projektválasztó
    2) Előző munkamenet folytatása (bezárva 2026-11-11 12:42, 3 projekt):
-        1. Website  D:\Projects\website
-        2. SmartHome  D:\Projects\smarthome
+        1. Website  Fix the checkout total
+        2. SmartHome  Wall panel weather card
         3. Notes  D:\Projects\notes
 
   Választás (Enter = 1)
 ```
 
 (1 = new work: project picker; 2 = continue the previous session, closed at the given time, with
-3 projects.) After `2` it asks which ones to continue (Enter = all, or numbers such as `1,3`). The
-first project starts in the current tab, the others in new tabs of the same window, each with
-`claude --continue`. If there is no previous session (first use), the project picker comes up
-directly.
+3 projects.) Next to each project you see the name of the Claude session that will be continued
+(the name given with `/rename` or by a hook, otherwise the title Claude generated); if the session
+has no name, the folder path. After `2` it asks which ones to continue (Enter = all, or numbers
+such as `1,3`). The first project starts in the current tab, the others in new tabs of the same
+window, each with `claude --resume <session>`: it opens the session that was running there when
+the tab was closed, even if a newer session has since started in the same folder in another tab
+(`--continue` would pick that one). If the session cannot be identified, `claude --continue` is
+used. If there is no previous session (first use), the project picker comes up directly.
 
 **What the previous session is:** every Claude tab (menu, palette, work/personal profile, restore)
 keeps a marker file in the `munkamenetek\` folder while running (per machine, not versioned) and

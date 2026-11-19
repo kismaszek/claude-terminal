@@ -22,6 +22,7 @@ param(
     [string]$Utvonal,
     [string]$Inditas,
     [ValidateSet('uj', 'folytat', 'korabbi')][string]$Mod = 'uj',
+    [ValidatePattern('^([0-9a-fA-F-]{36})?$')][string]$Session = '',   # -Mod folytat: ezt a sessiont
     [switch]$Indito
 )
 
@@ -43,8 +44,8 @@ $CloseGapSec = 90
 if (-not (Test-Path $SessionDir)) { New-Item -ItemType Directory -Path $SessionDir -Force | Out-Null }
 
 # A szkript önmagát hívja egy projekt közvetlen indításához (így minden indítás naplózódik)
-function Get-LaunchCmd([string]$path, [string]$mode) {
-    "pwsh.exe -NoExit -File `"$PSCommandPath`" -Inditas `"$path`" -Mod $mode"
+function Get-LaunchCmd([string]$path, [string]$mode, [string]$session = '') {
+    "pwsh.exe -NoExit -File `"$PSCommandPath`" -Inditas `"$path`" -Mod $mode$(if ($session) { " -Session $session" })"
 }
 $ListFile = Join-Path $PSScriptRoot 'claude-projektek.txt'
 if (-not (Test-Path $ListFile) -and (Test-Path (Join-Path $PSScriptRoot 'claude-projektek.minta.txt'))) {
@@ -124,6 +125,30 @@ function Invoke-RepoUpdate {
 function Test-HasSession([string]$path) {
     $dir = Join-Path $ProjRoot ($path -replace '[^A-Za-z0-9]', '-')
     (Test-Path -LiteralPath $dir) -and [bool](Get-ChildItem -LiteralPath $dir -Filter *.jsonl -File -ErrorAction SilentlyContinue | Select-Object -First 1)
+}
+
+# A mappa legutolsó, $before előtt (+30 mp: a session-végi hookok még írhatnak) írt sessionje:
+# azonosító (Id) és név (Title): a /rename-mel vagy hookkal adott név (custom-title), ennek híján a
+# Claude által generált cím (ai-title). A $before azért kell, mert ugyanabban a mappában egy
+# másik, még futó fül sessionje frissebb lehet — ezért a folytatás sem --continue, hanem --resume <Id>.
+function Get-ClosedSession([string]$path, [datetime]$before) {
+    $dir = Join-Path $ProjRoot ($path -replace '[^A-Za-z0-9]', '-')
+    if (-not (Test-Path -LiteralPath $dir)) { return $null }
+    $f = Get-ChildItem -LiteralPath $dir -Filter *.jsonl -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -le $before.AddSeconds(30) } |
+        Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $f) { return $null }
+    $title = $null
+    $hits = @(Select-String -LiteralPath $f.FullName -Pattern '"type":"(custom-title|ai-title)"' -ErrorAction SilentlyContinue)
+    foreach ($kind in 'custom-title', 'ai-title') {
+        $h = $hits | Where-Object { $_.Line -like "*`"type`":`"$kind`"*" } | Select-Object -Last 1
+        if ($h) {
+            try { $o = $h.Line | ConvertFrom-Json } catch { continue }
+            $t = if ($kind -eq 'custom-title') { $o.customTitle } else { $o.aiTitle }
+            if ($t) { $title = $t.Trim(); break }
+        }
+    }
+    [pscustomobject]@{ Id = $f.BaseName; Title = $title }
 }
 
 function Get-ProjectEntries {
@@ -637,7 +662,9 @@ function Get-PreviousSession {
         } | Sort-Object First)
 }
 
-function Start-ClaudeIn([string]$path, [string]$mode, [string]$label) {
+function Start-ClaudeIn([string]$path, [string]$mode, [string]$label, [string]$session = '') {
+    $dir = Join-Path $ProjRoot ($path -replace '[^A-Za-z0-9]', '-')
+    if ($session -and -not (Test-Path -LiteralPath (Join-Path $dir "$session.jsonl"))) { $session = '' }
     if ($mode -ne 'uj' -and -not (Test-HasSession $path)) {
         Write-Host '  Ebben a mappában még nem futott Claude-session, új indul.' -ForegroundColor DarkYellow
         $mode = 'uj'
@@ -648,7 +675,10 @@ function Start-ClaudeIn([string]$path, [string]$mode, [string]$label) {
     Write-Host ''
     try {
         switch ($mode) {
-            'folytat' { Write-Host "  Claude folytatja az utolsó sessiont: $path" -ForegroundColor Green; claude --continue --permission-mode auto }
+            'folytat' {
+                if ($session) { Write-Host "  Claude folytatja a bezárt sessiont: $path" -ForegroundColor Green; claude --resume $session --permission-mode auto }
+                else { Write-Host "  Claude folytatja az utolsó sessiont: $path" -ForegroundColor Green; claude --continue --permission-mode auto }
+            }
             'korabbi' { Write-Host "  Claude: korábbi session választása: $path" -ForegroundColor Green; claude --resume --permission-mode auto }
             default   { Write-Host "  Claude indul: $path" -ForegroundColor Green; claude --permission-mode auto }
         }
@@ -662,7 +692,7 @@ function Start-ClaudeIn([string]$path, [string]$mode, [string]$label) {
 if ($Inditas) {
     if (-not (Test-Path -LiteralPath $Inditas -PathType Container)) { Write-Host "  Nincs ilyen mappa: $Inditas" -ForegroundColor Red; return }
     Show-UpdateNotice (Get-RepoUpdate 0) -Short   # nem vár: az előző fetch eredménye, a mostani a háttérben fut
-    Start-ClaudeIn (Resolve-Path -LiteralPath $Inditas).Path.TrimEnd('\') $Mod ''
+    Start-ClaudeIn (Resolve-Path -LiteralPath $Inditas).Path.TrimEnd('\') $Mod '' $Session
     return
 }
 
@@ -686,8 +716,12 @@ if ($Indito) {
         $closed = ($prev | Sort-Object Last | Select-Object -Last 1).Last.ToString('yyyy-MM-dd HH:mm')
         Write-Host '   2) ' -NoNewline -ForegroundColor Yellow; Write-Host "Előző munkamenet folytatása (bezárva $closed, $($prev.Count) projekt):"
         for ($i = 0; $i -lt $prev.Count; $i++) {
+            # A bezárt session: ezt folytatjuk (--resume <Id>), és a neve többet mond az előzményről,
+            # mint az útvonal; név híján marad az útvonal
+            $cs = Get-ClosedSession $prev[$i].Path $prev[$i].Last
+            $prev[$i] | Add-Member -NotePropertyName Session -NotePropertyValue $(if ($cs) { $cs.Id } else { '' }) -Force
             Write-Host ('        {0}. {1}' -f ($i + 1), (& $labelOf $prev[$i].Path)) -NoNewline
-            Write-Host "  $($prev[$i].Path)" -ForegroundColor DarkGray
+            Write-Host "  $(if ($cs.Title) { $cs.Title } else { $prev[$i].Path })" -ForegroundColor DarkGray
         }
         Write-Host ''
         $a = (Read-Host '  Választás (Enter = 1)').Trim()
@@ -704,11 +738,11 @@ if ($Indito) {
                 # Az első projekt ebben a fülben, a többi új fülön ugyanebben az ablakban
                 foreach ($p in $pick | Select-Object -Skip 1) {
                     $lbl = & $labelOf $p.Path
-                    $wtArgs = "-w 0 nt -p $LaunchProfile --title `"$lbl`" -d `"$($p.Path)`" $(Get-LaunchCmd $p.Path 'folytat')"
+                    $wtArgs = "-w 0 nt -p $LaunchProfile --title `"$lbl`" -d `"$($p.Path)`" $(Get-LaunchCmd $p.Path 'folytat' $p.Session)"
                     Start-Process wt.exe -ArgumentList $wtArgs
                     Start-Sleep -Milliseconds 300
                 }
-                Start-ClaudeIn $pick[0].Path 'folytat' (& $labelOf $pick[0].Path)
+                Start-ClaudeIn $pick[0].Path 'folytat' (& $labelOf $pick[0].Path) $pick[0].Session
                 return
             }
         }

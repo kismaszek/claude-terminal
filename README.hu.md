@@ -17,8 +17,8 @@ billentyűre vagy egy listaválasztásra rövidíti:
 
 - **Asztali ikon, és ott folytatod, ahol abbahagytad.** A „Claude projektek” ikon megkérdezi:
   új munka (projektválasztó), vagy az előző munkamenet folytatása. Folytatáskor az előző
-  munkamenet minden projektje külön fülön nyílik meg, és mindegyikben a Claude az utolsó
-  beszélgetést folytatja.
+  munkamenet minden projektje külön fülön nyílik meg, és mindegyikben a Claude azt a
+  beszélgetést folytatja, amelyik ott a bezáráskor futott.
 - **Egy billentyű, és a projektben vagy.** `Ctrl+Shift+3` megnyitja a projektlistát. Egy szám,
   és az adott mappában már fut is a Claude. A legutóbb használt mappák maguktól kerülnek fel.
 - **Folytatás egy lépésben.** `c2` a 2. projekt utolsó sessionjét folytatja, `r2` a korábbiak
@@ -112,17 +112,22 @@ csomag, és ugyanúgy `telepites.cmd`.
 
    1) Új munka: projektválasztó
    2) Előző munkamenet folytatása (bezárva 2026-11-11 12:42, 3 projekt):
-        1. Weboldal  D:\Projektek\weboldal
-        2. Okosotthon  D:\Projektek\okosotthon
+        1. Weboldal  Kosár-összesítő javítása
+        2. Okosotthon  Időjárás-kártya a fali panelre
         3. Jegyzetek  D:\Projektek\jegyzetek
 
   Választás (Enter = 1)
 ```
 
+A projekt neve mellett a folytatandó session neve látszik (a `/rename`-mel vagy hookkal adott
+név, ennek híján a Claude által generált cím); ha a sessionnek nincs neve, az útvonal.
+
 A `2` után megkérdezi, melyiket folytassa (Enter = mind, vagy sorszámok, pl. `1,3`). Az első
 projekt az aktuális fülön, a többi új fülön indul ugyanabban az ablakban, mindegyik
-`claude --continue`-val. Ha az előző munkamenet üres (első használat), rögtön a projektválasztó
-jön.
+`claude --resume <session>`-nel: a bezáráskor ott futó sessiont nyitja meg, akkor is, ha
+ugyanabban a mappában azóta egy másik fülön frissebb session fut (a `--continue` azt választaná).
+Ha a session nem azonosítható, marad a `claude --continue`. Ha az előző munkamenet üres (első
+használat), rögtön a projektválasztó jön.
 
 **Mi az előző munkamenet:** minden Claude-fül (menü, paletta, Céges/Magán profil,
 visszaállítás) futás közben jelzőfájlt tart a `munkamenetek\` mappában (gépenkénti, nincs
